@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>用户管理</title>
+	<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+	<!-- 导航条 -->
+	<header></header>
+
+	<!-- 提示 -->
+	<div class="container">
+		<div class="alert alert-info" role="alert">hahhaa</div>
+	</div>
+
+	<div class="list-group">
+
+	</div>
+
+	<div class="main">
+		
+
+		<form class="form-inline query-form">
+		  <div class="form-group">
+		    <label class="sr-only" for="exampleInputEmail3">用户名</label>
+		    用户名<input type="text" name="name" class="form-control" id="exampleInputEmail3" placeholder="用户名">
+		  </div>
+		  <div class="form-group">
+		    <label class="sr-only" for="exampleInputPassword3">权限</label>
+		   <!--  <input type="password" class="form-control" id="exampleInputPassword3" placeholder="供应商"> -->
+		   权限:<select class="form-control" id="query-select-quanxian" name="quanxian">
+		  	 	<option>-请选择-</option>
+		   		<option>管理员</option>
+		   		<option>经理</option>
+		   		<option>普通用户</option>
+		   </select>
+		  </div>
+		  <div class="form-group">
+		    <label class="sr-only" for="exampleInputPassword3">性别</label>
+		   <!--  <input type="password" class="form-control" id="exampleInputPassword3" placeholder="供应商"> -->
+		   性别:<select class="form-control" id="query-select-sex" name="sex">
+		  	 	<option>-请选择-</option>
+		   		<option>男</option>
+		   		<option>女</option>
+		   </select>
+		  </div>
+
+		 <!--  <div class="btn-group">
+			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			    供应商<span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu">
+			    <li><a href="#">Action</a></li>
+			    <li><a href="#">Another action</a></li>
+			    <li><a href="#">Something else here</a></li>
+			   
+
+			    <li><a href="#">Separated link</a></li>
+			  </ul>
+		   </div> -->
+
+		  <button type="submit" class="btn btn-primary btn-query">查询</button>
+		</form>
+
+		<button class="btn btn-primary" data-toggle="modal" data-target="#addUser">添加用户</button>
+
+		<table class="table table-bordered table-striped position-table">
+			<thead>
+				<tr>
+					<th>用户编号</th>
+					<th>用户名</th>
+					<th>性别</th>
+					<th>年龄</th>
+					<th>电话</th>
+					<th>邮箱</th>
+					<th>权限</th>
+					<th>注册时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody class="tbody-user">
+				<tr>
+					<td>${curr.no}</td>
+					<td>${curr.name}</td>
+					<td>${curr.danwei}</td>
+					<td>${curr.gongyingshang}</td>
+					<td>${curr.count}</td>
+					<td>${curr.salary}</td>
+					<td>${curr.count}</td>
+					<td>${curr.salary}</td>
+					<td><a href="#" data-toggle="modal" data-target="#updateUserModal" class="btn-update">修改</a> <a href="#" id="btn-deletee">删除</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- 分页 -->
+		<nav>
+		  <ul class="pagination">
+		   <!--  <li class="disabled prev">
+		      <a href="javaScript:;">
+		        <span>&laquo;</span>
+		      </a>
+		    </li> -->
+		    <!-- <li class="active"><a href="#">1</a></li>
+		    <li><a href="javaScript:;">2</a></li>
+		    <li><a href="javaScript:;">3</a></li>
+		    <li><a href="javaScript:;">4</a></li>
+		    <li><a href="javaScript:;">5</a></li> -->
+		   <!--  <li class="disabled ">
+		      <a href="javaScript:;" aria-label="Next">
+		        <span aria-hidden="true">&raquo;</span>
+		      </a>
+		    </li> -->
+		  </ul>
+		</nav>
+
+
+			<!-- 添加用户的模态框 -->
+		<div class="modal fade" id="addUser" tabindex="-1" role="dialog">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+		        <h4 class="modal-title" id="addUserModalLabel">添加用户</h4>
+		      </div>
+		      <div class="modal-body">
+		      	<div class="alert alert-danger hidden login-error">添加失败</div>
+		        <form class="add-user-form">
+		          <div class="form-group">
+				    <label for="addUserNo">用户编号</label>
+				    <input type="text" class="form-control" name="no" id="addUserNo" placeholder="请输入用户编号">
+				  </div>
+		          <div class="form-group">
+				    <label for="addUserName">用户名</label>
+				    <input type="text" class="form-control" name="name" id="addUserName" placeholder="请输入用户名">
+				  </div>
+				   <div class="form-group">
+				    <label for="addUserSex">性别</label>
+				    <select class="form-control" id="addUserSex" name="sex">
+					  <option>-请选择性别-</option>
+					  <option>男</option>
+					  <option>女</option>
+					</select>
+				  </div>
+				  <div class="form-group">
+				    <label for="addUserAge">年龄</label>
+				    <input type="text" class="form-control" name="age" id="addUserAge" placeholder="请输入年龄">
+				  </div>
+				  <div class="form-group">
+				    <label for="addUserTel">电话</label>
+				    <input type="text" class="form-control" name="tel" id="addUserTel" placeholder="请输入用户电话">
+				  </div>
+				  <div class="form-group">
+				    <label for="addUserEmail">邮箱</label>
+				    <input type="text" class="form-control" name="email" id="addUserEmail" placeholder="请输入用户邮箱">
+				  </div>
+				   <div class="form-group">
+				    <label for="addUserQuanxian">权限</label>
+				    <select class="form-control" id="addUserQuanxian" name="quanxian">
+					  <option>-请选择用户权限-</option>
+					  <option>管理员</option>
+					  <option>经理</option>
+					  <option>普通用户</option>
+					</select>
+				  </div>
+				  
+
+				</form>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+			        <button type="button" class="btn btn-primary btn-add-user">添加</button>
+			      </div>
+			    </div>
+			</div>
+		</div>
+
+
+		<!-- 修改账单的模态框 -->
+		<div class="modal fade" id="updateUserModal" tabindex="-1" role="dialog">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+		        <h4 class="modal-title" >修改用户</h4>
+		      </div>
+		      <div class="modal-body">
+		      	<div class="alert alert-danger hidden login-error">修改失败</div>
+		        <form class="update-user-form">
+		          <div class="form-group">
+				    <label for="updateUserNo">用户编号</label>
+				    <input type="text" class="form-control" name="no" readonly="readonly" id="updateUserNo" placeholder="请输入用户编号">
+				  </div>
+		          <div class="form-group">
+				    <label for="updateUserName">用户名</label>
+				    <input type="text" class="form-control" name="name" id="updateUserName" placeholder="请输入用户名">
+				  </div>
+				   <div class="form-group">
+				    <label for="updateUserSex">性别</label>
+				    <select class="form-control" id="updateUserSex" name="sex">
+					  <option>-请选择性别-</option>
+					  <option>男</option>
+					  <option>女</option>
+					</select>
+				  </div>
+				  <div class="form-group">
+				    <label for="updateUserAge">年龄</label>
+				    <input type="text" class="form-control" name="age" id="updateUserAge" placeholder="请输入年龄">
+				  </div>
+				  <div class="form-group">
+				    <label for="updateUserTel">电话</label>
+				    <input type="text" class="form-control" name="tel" id="updateUserTel" placeholder="请输入用户电话">
+				  </div>
+				  <div class="form-group">
+				    <label for="updateUserEmail">邮箱</label>
+				    <input type="text" class="form-control" name="email" id="updateUserEmail" placeholder="请输入用户邮箱">
+				  </div>
+				   <div class="form-group">
+				    <label for="updateUserQuanxian">权限</label>
+				    <select class="form-control" id="updateUserQuanxian" name="quanxian">
+					  <option>-请选择用户权限-</option>
+					  <option>管理员</option>
+					  <option>经理</option>
+					  <option>普通用户</option>
+					</select>
+				  </div>
+				   <div class="form-group">
+				    <label for="updateUserCreateTime">注册时间</label>
+				    <input type="text" class="form-control" name="create_time" readonly="readonly" id="updateUserCreateTime" placeholder="请输入用户注册时间">
+				  </div>
+				</form>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+			        <button type="button" class="btn btn-primary btn-update-zhangdan btn-update-user">修改</button>
+			      </div>
+			    </div>
+			</div>
+		</div>
+
+	</div>
+	
+	
+	<script src="/lib/jquery/jquery-1.12.4.min.js"></script>
+	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/js/common/register_modal.js"></script>
+	<script src="/js/common/login_modal.js"></script>
+	<script src="/js/common/header.js"></script>
+	<script src="/js/common/menu.js"></script>
+	<script src="/js/zhiyuan/index.js"></script>
+</body>
+</html>
